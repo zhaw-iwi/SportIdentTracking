@@ -40,7 +40,7 @@ public class WebDownloadSession implements DownloadSession {
 			punchList.append(p.getControlNo());
 			punchList.append("-");
 			punchList.append(p.getRawTime());
-			punchList.append("/");
+			punchList.append(";");
 		}
 		System.out.println("Read Controls: " + punchList.toString());
 
