@@ -73,21 +73,13 @@ public class Main {
 	private static String queryUrl(Scanner scanner) {
 		String selectedUrl;
 
-		String testUrl1 = "http://localhost/climber-challenge/src/backend/service.php/scan/lease/";
-		String testUrl2 = "http://localhost/climber-challenge/src/backend/service.php/scan/upload/";
-		String testUrl3 = "http://aranea-dev.herokuapp.com/src/backend/service.php/scan/lease/";
-		String testUrl4 = "http://aranea-dev.herokuapp.com/src/backend/service.php/scan/upload/";
-		String testUrl5 = "http://aranea.herokuapp.com/src/backend/service.php/scan/lease/";
-		String testUrl6 = "http://aranea.herokuapp.com/src/backend/service.php/scan/upload/";
+		String testUrl1 = "http://localhost:4567/services/tracking/";
+		String testUrl2 = "http://indoor-tracking-backend.herokuapp.com/services/tracking/";
 
 		System.out.println("Select an URL: ");
 		System.out.println("[d] debug mode, prints to console");
 		System.out.println("[1] " + testUrl1);
 		System.out.println("[2] " + testUrl2);
-		System.out.println("[3] " + testUrl3);
-		System.out.println("[4] " + testUrl4);
-		System.out.println("[5] " + testUrl5);
-		System.out.println("[6] " + testUrl6);
 		System.out.println("[q] quit/exit");
 		System.out.println("or enter another URL: ");
 		selectedUrl = scanner.nextLine();
@@ -101,14 +93,6 @@ public class Main {
 			selectedUrl = testUrl1;
 		} else if (selectedUrl.toLowerCase().equals("2")) {
 			selectedUrl = testUrl2;
-		} else if (selectedUrl.toLowerCase().equals("3")) {
-			selectedUrl = testUrl3;
-		} else if (selectedUrl.toLowerCase().equals("4")) {
-			selectedUrl = testUrl4;
-		} else if (selectedUrl.toLowerCase().equals("5")) {
-			selectedUrl = testUrl5;
-		} else if (selectedUrl.toLowerCase().equals("6")) {
-			selectedUrl = testUrl6;
 		}
 		return selectedUrl;
 	}
