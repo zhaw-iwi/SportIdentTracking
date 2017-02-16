@@ -1,4 +1,4 @@
-package ch.zhaw.iwi.climbing;
+package ch.zhaw.iwi.indoortracking;
 
 import java.net.URL;
 import java.time.Instant;

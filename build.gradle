@@ -24,7 +24,7 @@ dependencies {
 
 jar {
   manifest {
-    attributes 'Main-Class': 'ch.zhaw.iwi.climbing.Main'
+    attributes 'Main-Class': 'ch.zhaw.iwi.indoortracking.Main'
   }
   from {
     configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }

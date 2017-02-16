@@ -1,4 +1,4 @@
-package ch.zhaw.iwi.climbing;
+package ch.zhaw.iwi.indoortracking;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ public class Main {
 	private final static String URL = "url";
 
 	public static void main(String[] args) throws Exception {
-		System.out.println("Welcome to 4milaSI " + Version.getVersion() + " / " + " ClimberChallengeSI " + ch.zhaw.iwi.climbing.Version.getVersion());
+		System.out.println("Welcome to 4milaSI " + Version.getVersion() + " / " + " IndoorTrackingSI " + ch.zhaw.iwi.indoortracking.Version.getVersion());
 
 		Map<String, String> parameters = parseArguments(args);
 		Scanner scanner = new Scanner(System.in);

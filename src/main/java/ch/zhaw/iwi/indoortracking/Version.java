@@ -1,4 +1,4 @@
-package ch.zhaw.iwi.climbing;
+package ch.zhaw.iwi.indoortracking;
 
 public final class Version {
 
