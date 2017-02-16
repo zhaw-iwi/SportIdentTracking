@@ -78,6 +78,31 @@ public class WebDownloadSession implements DownloadSession {
 
 		return true;
 	}
+	
+	@Override
+	public void handleAutoSend(String cardNo, String controlNo, Punch punch) {
+		// send URL to localhost server
+		try {
+			if (url.length() > 0) {
+				String request = url + controlNo + "/" + cardNo + "/" + punch.getControlNo() + "-" + punch.getRawTime() + ";";
+				System.out.println("Send request GET " + request);
+				URL u = new URL(request);
+				Scanner urlScanner = new Scanner(u.openStream());
+				String response = urlScanner.useDelimiter("\\Z").next();
+				urlScanner.close();
+				System.out.println("http result: " + response);
+			} else {
+				System.out.println("*************************");
+				System.out.println("Debug mode, Station Number: " + controlNo + ", Card Number: " + cardNo);
+				System.out.println("Raw time (ms): " + punch.getRawTime());
+				Instant instant = Instant.ofEpochMilli(punch.getRawTime());
+				System.out.println("Formatted time: " + LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toString() + "." + String.format("%03d", punch.getRawTime() % 1000));
+				System.out.println("*************************");
+			}
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "Failed handling data", e);
+		}
+	}
 
 	@Override
 	public Boolean enableSiacAirMode() {
