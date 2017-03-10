@@ -45,40 +45,25 @@ public class WebDownloadSession implements DownloadSession {
 		System.out.println("Read Controls: " + punchList.toString());
 
 		// send URL to localhost server
-		try {
-			if (url.length() > 0) {
-				String request = url + stationNo + "/" + cardNo + "/" + punchList.toString();
-				System.out.println("Send request GET " + request);
-				URL u = new URL(request);
-				Scanner urlScanner = new Scanner(u.openStream());
-				String response = urlScanner.useDelimiter("\\Z").next();
-				urlScanner.close();
-				System.out.println("http result: " + response);
-				enableSiacAirMode = null;
-				if (response != null && response.equalsIgnoreCase("enable")) {
-					enableSiacAirMode = true;
-				} else if (response != null && response.equalsIgnoreCase("disable")) {
-					enableSiacAirMode = false;
-				}
-			} else {
-				System.out.println("*************************");
-				System.out.println("Debug mode, Station Number: " + stationNo + ", Card Number: " + cardNo);
-				for (Punch punch : controlData) {
-					System.out.println("Sort Code: " + punch.getSortCode());
-					System.out.println("Control Number: " + punch.getControlNo());
-					System.out.println("Raw time (ms): " + punch.getRawTime());
-					Instant instant = Instant.ofEpochMilli(punch.getRawTime());
-					System.out.println("Formatted time: " + LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toString() + "." + String.format("%03d", punch.getRawTime() % 1000));
-				}
-				System.out.println("*************************");
+		if (url.length() > 0) {
+			UploadRunnable runnable = new UploadRunnable(cardNo, stationNo, cardNo, punchList.toString());
+			runnable.run();
+		} else {
+			System.out.println("*************************");
+			System.out.println("Debug mode, Station Number: " + stationNo + ", Card Number: " + cardNo);
+			for (Punch punch : controlData) {
+				System.out.println("Sort Code: " + punch.getSortCode());
+				System.out.println("Control Number: " + punch.getControlNo());
+				System.out.println("Raw time (ms): " + punch.getRawTime());
+				Instant instant = Instant.ofEpochMilli(punch.getRawTime());
+				System.out.println("Formatted time: " + LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toString() + "." + String.format("%03d", punch.getRawTime() % 1000));
 			}
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, "Failed handling data", e);
+			System.out.println("*************************");
 		}
 
 		return true;
 	}
-	
+
 	@Override
 	public void handleAutoSend(String cardNo, String controlNo, Punch punch) {
 		// send URL to localhost server
